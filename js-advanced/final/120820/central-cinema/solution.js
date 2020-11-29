@@ -65,13 +65,13 @@ function solve () {
   const onArchiveClick = (index, sold) => e => {
     e.preventDefault();
 
-    if (!validateArchive(sold)) return;
+    if (!validateArchive(sold.value)) return;
 
     const [movieToRemove] = state.movies.splice(index, 1);
 
     state.archive.push({
       name: movieToRemove.name,
-      total: movieToRemove.price * Number(sold)
+      total: movieToRemove.price * Number(sold.value)
     });
 
     render(state);
@@ -93,10 +93,10 @@ function solve () {
     return movies.map((m, index) => {
       const title = createDOMElement('span', m.name);
       const hall = createDOMElement('strong', `Hall: ${m.hall}`);
-      const price = createDOMElement('strong', m.price);
+      const price = createDOMElement('strong', m.price.toFixed(2));
       const sold = createDOMElement('input', '', { placeholder: 'Tickets Sold' });
       const archiveBtn = createDOMElement('button', 'Archive');
-      archiveBtn.addEventListener('click', onArchiveClick(index, sold.value));
+      archiveBtn.addEventListener('click', onArchiveClick(index, sold));
 
       const div = createDOMElement('div', '', {}, {}, price, sold, archiveBtn);
 
@@ -110,7 +110,7 @@ function solve () {
 
     return archive.map((a, index) => {
       const title = createDOMElement('span', a.name);
-      const total = createDOMElement('strong', `Total amount ${a.total}`);
+      const total = createDOMElement('strong', `Total amount ${a.total.toFixed(2)}`);
       const deleteBtn = createDOMElement('button', 'Delete');
       deleteBtn.addEventListener('click', onDeleteClick(index));
 
