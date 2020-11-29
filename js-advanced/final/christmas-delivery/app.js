@@ -41,19 +41,13 @@ function solution () {
     discardedGifts.textContent = '';
   };
 
-  cleanUp();
-
   const btnOnClick = (listName, index) => e => {
     const [gift] = state.gifts.splice(index, 1);
-
     state[listName].push(gift);
-
     render(state);
   };
 
   const renderGifts = gifts => {
-    if (gifts.length === 0) return [];
-
     return gifts.map((g, index) => {
       const sendBtn = el(
         'button',
@@ -81,10 +75,8 @@ function solution () {
   };
   const renderLi = x => el('li', x, { className: 'gift' });
 
-  const renderList = send => {
-    if (send.length === 0) return [];
-    return send.map(renderLi);
-  };
+  const renderList = list => list.map(renderLi);
+
   const render = state => {
     cleanUp();
 
@@ -106,6 +98,8 @@ function solution () {
 
     state.gifts.push(name);
     state.gifts.sort((a, b) => a.localeCompare(b));
+
+    giftName.value = '';
 
     render(state);
   };
