@@ -16,7 +16,7 @@ function solution () {
         domElement.addEventListener(eventName, eventHandler);
       });
 
-    domElement.appendChild(...children);
+    domElement.append(...children);
     return domElement;
   };
 
