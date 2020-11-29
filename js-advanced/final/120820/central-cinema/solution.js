@@ -65,13 +65,13 @@ function solve () {
   const onArchiveClick = (index, sold) => e => {
     e.preventDefault();
 
-    if (!validateArchive(sold.value)) return;
+    if (!validateArchive(sold)) return;
 
     const [movieToRemove] = state.movies.splice(index, 1);
 
     state.archive.push({
       name: movieToRemove.name,
-      total: movieToRemove.price * Number(sold.value)
+      total: movieToRemove.price * Number(sold)
     });
 
     render(state);
@@ -96,7 +96,7 @@ function solve () {
       const price = createDOMElement('strong', m.price);
       const sold = createDOMElement('input', '', { placeholder: 'Tickets Sold' });
       const archiveBtn = createDOMElement('button', 'Archive');
-      archiveBtn.addEventListener('click', onArchiveClick(index, sold));
+      archiveBtn.addEventListener('click', onArchiveClick(index, sold.value));
 
       const div = createDOMElement('div', '', {}, {}, price, sold, archiveBtn);
 
