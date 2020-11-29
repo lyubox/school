@@ -1,24 +1,26 @@
 function solution () {
-  const createDOMElement = (type, text, attributes, events, ...children) => {
-    const domElement = document.createElement(type);
+  function el (type, content, attributes) {
+    const result = document.createElement(type);
 
-    if (text !== '') {
-      domElement.textContent = text;
+    if (attributes !== undefined) {
+      Object.assign(result, attributes);
     }
 
-    attributes && Object.entries(attributes)
-      .forEach(([attrKey, attrValue]) => {
-        domElement.setAttribute(attrKey, attrValue);
-      });
+    if (Array.isArray(content)) {
+      content.forEach(append);
+    } else {
+      append(content);
+    }
 
-    events && Object.entries(events)
-      .forEach(([eventName, eventHandler]) => {
-        domElement.addEventListener(eventName, eventHandler);
-      });
+    function append (node) {
+      if (typeof node === 'string' || typeof node === 'number') {
+        node = document.createTextNode(node);
+      }
 
-    domElement.append(...children);
-    return domElement;
-  };
+      result.appendChild(node);
+    }
+    return result;
+  }
 
   const state = {
     gifts: [],
@@ -53,28 +55,31 @@ function solution () {
     if (gifts.length === 0) return [];
 
     return gifts.map((g, index) => {
-      const sendBtn = createDOMElement(
+      const sendBtn = el(
         'button',
         'Send',
-        { id: 'sendButton' },
-        { click: btnOnClick('send', index) });
-      const discardedBtn = createDOMElement(
+        { id: 'sendButton' }
+      );
+      sendBtn.addEventListener('click', btnOnClick('send', index));
+
+      const discardedBtn = el(
         'button',
         'Discard',
-        { id: 'discardButton' },
-        { click: btnOnClick('discarded', index) });
+        { id: 'discardButton' }
+      );
+      discardedBtn.addEventListener('click', btnOnClick('discarded', index));
 
-      const li = createDOMElement(
+      const li = el(
         'li',
-        '',
-        { class: 'gift' },
-        {},
-        g, sendBtn, discardedBtn);
+        g,
+        { className: 'gift' }
+      );
+      li.append(sendBtn, discardedBtn);
 
       return li;
     });
   };
-  const renderLi = x => createDOMElement('li', x, { class: 'gift' });
+  const renderLi = x => el('li', x, { className: 'gift' });
 
   const renderList = send => {
     if (send.length === 0) return [];
@@ -84,13 +89,13 @@ function solution () {
     cleanUp();
 
     const gifts = renderGifts(state.gifts);
-    gifts.forEach(g => listOfGifts.appendChild(g));
+    listOfGifts.append(...gifts);
 
     const send = renderList(state.send);
-    send.forEach(s => sendGifts.appendChild(s));
+    sendGifts.append(...send);
 
     const discarded = renderList(state.discarded);
-    discarded.forEach(d => discardedGifts.appendChild(d));
+    discardedGifts.append(...discarded);
   };
   const addGiftBtnClick = e => {
     e.preventDefault();
