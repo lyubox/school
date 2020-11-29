@@ -32,7 +32,6 @@ function solution () {
   const [, listOfGifts] = sectionListOfGifts.children;
   const [, sendGifts] = sectionSendGifts.children;
   const [, discardedGifts] = sectionDiscardedGifts.children;
-  console.log({ listOfGifts, sendGifts, discardedGifts });
 
   const cleanUp = () => {
     listOfGifts.textContent = '';
@@ -72,7 +71,6 @@ function solution () {
     return send.map(renderLi);
   };
   const render = state => {
-    console.log(state);
     cleanUp();
 
     const gifts = renderGifts(state.gifts);
