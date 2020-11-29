@@ -70,11 +70,11 @@ function solve () {
 
     if (!validateArchive(sold.value)) return;
 
-    const [movieToRemove] = state.movies.splice(index, 1);
+    const [movieRemoved] = state.movies.splice(index, 1);
 
     state.archive.push({
-      name: movieToRemove.name,
-      total: movieToRemove.price * Number(sold.value)
+      name: movieRemoved.name,
+      total: movieRemoved.price * Number(sold.value)
     });
 
     render(state);
@@ -115,7 +115,6 @@ function solve () {
       const title = createDOMElement('span', a.name);
       const total = createDOMElement('strong', `Total amount ${a.total.toFixed(2)}`);
       const deleteBtn = createDOMElement('button', 'Delete', {}, { click: onDeleteClick(index) });
-      //   deleteBtn.addEventListener('click', onDeleteClick(index))
 
       const li = createDOMElement('li', '', {}, {}, title, total, deleteBtn);
       return li;
