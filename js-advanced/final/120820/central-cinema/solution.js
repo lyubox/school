@@ -24,8 +24,9 @@ function solve () {
     archive: []
   };
 
-  const [name, hall, price] = Array.from(document.querySelectorAll('#container input'));
-  const onScreenBtn = document.querySelector('#container button');
+  const form = document.getElementById('container');
+  const [name, hall, price, onScreenBtn] = Array.from(form.children);
+  //   const onScreenBtn = document.querySelector('#container button')
   const movieList = document.querySelector('#movies ul');
   const archiveList = document.querySelector('#archive ul');
   const clearBtn = document.querySelector('#archive button');
