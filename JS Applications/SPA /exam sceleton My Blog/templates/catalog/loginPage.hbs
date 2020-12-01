@@ -1,0 +1,29 @@
+{{> header}}
+<section id="login">
+    <div class="color">
+        <div class="login-form">
+            <h1>Login</h1>
+            <form action="/login" method="POST" id="form">
+                <label for="email">Email</label>
+                <input type="text" name="email">
+                <label for="password">Password</label>
+                <input type="password" name="password">
+                <button>Submit</button>
+                <a href="/register" class="option">Don't have an account?</a>
+            </form>
+        </div>
+    </div>
+</section>
+
+{{!-- <form class="text-center border border-light p-5" action="/login" method="POST">
+    <div class="form-group">
+
+        <label for="email">Enter Email</label>
+        <input type="email" class="form-control" placeholder="email" name="email" value="">
+        <label for="password">Password</label>
+        <input type="password" class="form-control" placeholder="password" name="password" value="">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Login</button>
+</form>
+{{> footer}} --}}

@@ -1,0 +1,47 @@
+<main id="home-logged">
+    <section class="first-section">
+        <section class="background-container">
+            <form action="/edit/{{item._id}}" method="POST" class="edit-form">
+                <h1>Edit Post</h1>
+                <label for="title">{{title}}</label>
+                <input type="text" name="title" value="Javascript">
+                <label for="category">{{category}}</label>
+                <input type="text" name="category" value="Programming">
+                <label for="content">{{content}}</label>
+                <textarea name="content" cols="30" rows="7">Javascript is the best language!</textarea>
+                <button>Edit</button>
+                <a href="/home" id="close-btn"><img src="../../images/close.png"></a>
+            </form>
+        </section>
+    </section>
+</main>
+</body>
+{{!-- <form class="text-center border border-light p-5" action="/edit/{{item._id}}" method="POST">
+    <h1>Edit Movie</h1>
+    <div class="form-group">
+        <label for="title">{{title}}</label>
+        <input type="text" class="form-control" placeholder="Movie Title" value="" name="title">
+    </div>
+    <div class="form-group">
+        <label for="description">{{description}}</label>
+        <textarea class="form-control" placeholder="Movie Description..." name="description"></textarea>
+    </div>
+    <div class="form-group">
+        <label for="imageUrl">{{url}}</label>
+        <input type="text" class="form-control" placeholder="Image Url" value="" name="url">
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form> --}}
+
+{{!-- <div class="container">
+
+    <div>
+        <h1>Edit Page</h1>
+        {{> editForm}}
+    </div>
+</div>
+
+
+
+
+{{> footer}} 

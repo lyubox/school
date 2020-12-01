@@ -1,0 +1,47 @@
+{{> header}}
+{{#if user}}
+<section id="home-logged">
+
+    {{> createPost}}
+
+
+    {{> items}}
+
+
+</section>
+{{else}}
+<section id="home">
+    <section class="background-container">
+        <h1>Welcome to MyBlog!</h1>
+        <div class="auth-buttons">
+            <a href="/login">Login</a>
+            <a href="/register">Register</a>
+        </div>
+    </section>
+</section>
+{{/if}}
+
+{{!-- <div class="jumbotron jumbotron-fluid text-light" style="background-color: #343a40;">
+    <img src="https://s.studiobinder.com/wp-content/uploads/2019/06/Best-M-Night-Shyamalan-Movies-and-Directing-Style-StudioBinder.jpg"
+        class="img-fluid" alt="Responsive image">
+    <h1 class="display-4">Movies</h1>
+    <p class="lead">Unlimited movies, TV shows, and more. Watch anywhere. Cancel anytime.</p>
+</div>
+{{#if user}}
+<h1 class="text-center">Movies</h1>
+<section>
+    <a href="/create" class="btn btn-warning ">Add Movie</a>
+    <form class="search float-right">
+        <label>Search: </label>
+        <input type="text">
+        <input type="submit" class="btn btn-info" value="Search">
+    </form>
+    {{/if}}
+    {{#if item}}
+    {{> items}}
+    {{else}}
+    <h1>No Movies...</h1>
+    {{/if}}
+</section>
+
+{{> footer}} --}}
