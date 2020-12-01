@@ -24,11 +24,14 @@ function solve () {
     archive: []
   };
 
-  const [name, hall, price] = Array.from(document.querySelectorAll('#container input'));
-  const onScreenBtn = document.querySelector('#container button');
+  const form = document.getElementById('container');
+  const [name, hall, price, onScreenBtn] = Array.from(form.children);
   const movieList = document.querySelector('#movies ul');
   const archiveList = document.querySelector('#archive ul');
   const clearBtn = document.querySelector('#archive button');
+
+  movieList.innerHTML = '';
+  archiveList.innerHTML = '';
 
   clearBtn.addEventListener('click', e => {
     state.archive = [];
@@ -67,11 +70,11 @@ function solve () {
 
     if (!validateArchive(sold.value)) return;
 
-    const [movieToRemove] = state.movies.splice(index, 1);
+    const [movieRemoved] = state.movies.splice(index, 1);
 
     state.archive.push({
-      name: movieToRemove.name,
-      total: movieToRemove.price * Number(sold.value)
+      name: movieRemoved.name,
+      total: movieRemoved.price * Number(sold.value)
     });
 
     render(state);
@@ -95,8 +98,8 @@ function solve () {
       const hall = createDOMElement('strong', `Hall: ${m.hall}`);
       const price = createDOMElement('strong', m.price.toFixed(2));
       const sold = createDOMElement('input', '', { placeholder: 'Tickets Sold' });
-      const archiveBtn = createDOMElement('button', 'Archive');
-      archiveBtn.addEventListener('click', onArchiveClick(index, sold));
+      const archiveBtn = createDOMElement('button', 'Archive', {}, { click: onArchiveClick(index, sold) });
+      //   archiveBtn.addEventListener('click', onArchiveClick(index, sold))
 
       const div = createDOMElement('div', '', {}, {}, price, sold, archiveBtn);
 
@@ -111,8 +114,7 @@ function solve () {
     return archive.map((a, index) => {
       const title = createDOMElement('span', a.name);
       const total = createDOMElement('strong', `Total amount ${a.total.toFixed(2)}`);
-      const deleteBtn = createDOMElement('button', 'Delete');
-      deleteBtn.addEventListener('click', onDeleteClick(index));
+      const deleteBtn = createDOMElement('button', 'Delete', {}, { click: onDeleteClick(index) });
 
       const li = createDOMElement('li', '', {}, {}, title, total, deleteBtn);
       return li;
