@@ -23,13 +23,6 @@ export async function postRegister(ctx) {
         if (email.length == 0 || password == 0) {
             throw new Error("All field are required!");
         } else if (password !== rePass) {
-            // const errBox = document.getElementById("errorBox");
-            // errBox.style.display = "block";
-            // errBox.innerHTML = "Password must match";
-
-            // setTimeout(function () {
-            //     errBox.style.display = "none";
-            // }, 3000);
             throw new Error("Passwords don't match!");
         } else {
             const result = await registerUser(email, password);
