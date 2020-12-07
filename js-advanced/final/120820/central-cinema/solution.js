@@ -1,5 +1,6 @@
 function solve () {
   const createDOMElement = (type, text, attributes, events, ...children) => {
+    console.log({ children });
     const domElement = document.createElement(type);
 
     if (text !== '') {
@@ -16,7 +17,7 @@ function solve () {
         domElement.addEventListener(eventName, eventHandler);
       });
 
-    domElement.append(...children);
+    children.forEach(c => domElement.appendChild(c));
     return domElement;
   };
   const state = {
@@ -113,7 +114,7 @@ function solve () {
 
     return archive.map((a, index) => {
       const title = createDOMElement('span', a.name);
-      const total = createDOMElement('strong', `Total amount ${a.total.toFixed(2)}`);
+      const total = createDOMElement('strong', `Total amount: ${a.total.toFixed(2)}`);
       const deleteBtn = createDOMElement('button', 'Delete', {}, { click: onDeleteClick(index) });
 
       const li = createDOMElement('li', '', {}, {}, title, total, deleteBtn);
@@ -130,9 +131,9 @@ function solve () {
     const archives = renderArchives(state.archive);
 
     movieList.innerHTML = '';
-    movies.forEach(li => movieList.append(li));
+    movies.forEach(li => movieList.appendChild(li));
 
     archiveList.innerHTML = '';
-    archives.forEach(li => archiveList.append(li));
+    archives.forEach(li => archiveList.appendChild(li));
   };
 }
