@@ -2,29 +2,28 @@ class Movie {
   constructor (movieName, ticketPrice) {
     this.movieName = movieName;
     this.ticketPrice = Number(ticketPrice);
-    this.screenings = {};
+    this.screenings = [];
     this.totalProfit = 0;
     this.totalSold = 0;
   }
 
   newScreening (date, hall, description) {
-    const record = this.screenings[hall + date];
+    const record = this.screenings.find(s => s.date === date && s.hall === hall);
 
     if (record) {
       throw new Error(`Sorry, ${hall} hall is not available on ${date}`);
     }
 
-    this.screenings[hall + date] = {
+    this.screenings.push({
       date,
       hall,
-      description
-    };
+    description});
 
     return `New screening of ${this.movieName} is added.`;
   }
 
   endScreening (date, hall, soldTickets) {
-    const record = this.screenings[hall + date];
+    const record = this.screenings.find(s => s.date === date && s.hall === hall);
 
     if (!record) {
       throw new Error(`Sorry, there is no such screening for ${this.movieName} movie.`);
@@ -34,23 +33,17 @@ class Movie {
     this.totalProfit += currentProfit;
     this.totalSold += soldTickets;
 
-    const {
-      [hall + date]: toRemove,
-      ...newScreenings
-    } = this.screenings;
-    this.screenings = newScreenings;
+    this.screenings = this.screenings.filter(s => s.date !== date || s.hall !== hall);
 
     return `${this.movieName} movie screening on ${date} in ${hall} hall has ended. Screening profit: ${currentProfit}`;
   }
 
   toString () {
-    const sortedScreenings = Object.keys(this.screenings)
-      .map(s => this.screenings[s])
-      .sort((a, b) => a.hall.localeCompare(b.hall));
+    this.screenings.sort((a, b) => a.hall.localeCompare(b.hall));
 
     const screeningLines = this.screenings.length === 0
       ? ['No more screenings!']
-      : sortedScreenings.map(s => `${s.hall} - ${s.date} - ${s.description}`);
+      : this.screenings.map(s => `${s.hall} - ${s.date} - ${s.description}`);
 
     return [
       `${this.movieName} full information:`,
