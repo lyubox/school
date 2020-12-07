@@ -1,4 +1,5 @@
 function createDOMElement (type, text, attributes, events, ...children) {
+  console.log({ children});
   const domElement = document.createElement(type);
 
   if (text !== '') {
@@ -15,6 +16,7 @@ function createDOMElement (type, text, attributes, events, ...children) {
       domElement.addEventListener(eventName, eventHandler);
     });
 
-  domElement.append(...children);
+  children.forEach(c => domElement.appendChild(c));
+  // domElement.append(...children)
   return domElement;
 }
