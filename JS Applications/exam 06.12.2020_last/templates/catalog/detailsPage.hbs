@@ -11,7 +11,9 @@
 			<div>{{article.city}}</div>
 			<div class="data-and-time">
 				{{article.duration}}
+				{{#if canEdit}}
 				<a href="/edit/{{article._id}}" class="edit-destination-detail"></a>
+				{{/if}}
 			</div>
 			<div>
 				{{article.departureDate}}

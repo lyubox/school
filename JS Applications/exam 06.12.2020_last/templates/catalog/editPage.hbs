@@ -1,7 +1,7 @@
 {{> header}}
-<section id="viewEditdestination" action="/edit/{{article._id}}" method="POST">
+<section id="viewEditdestination">
 	<h2>Edit existing destination</h2>
-	<form id="formAdddestination">
+	<form id="formAdddestination" action="/edit/{{article._id}}" method="POST">
 		<label for="destination">Destination name:</label>
 		<input type="text" id="destination" name="destination" value={{article.destination}}>
 		<label for="city">City:</label>

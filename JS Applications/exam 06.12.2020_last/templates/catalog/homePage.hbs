@@ -1,7 +1,8 @@
 {{> header}}
-{{#if user}}
+{{> notification}}
 <section id="viewCatalog" class="background-img">
 	<div class="added-destinations">
+		{{#if user}}
 		{{#each article}}
 		{{> article}}
 		{{/each}}
